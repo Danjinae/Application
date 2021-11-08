@@ -15,12 +15,12 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="자유게시판"
-            app:titleMarginStart="100dp"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/tabs_community"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="자유게시판"
+            app:titleMarginStart="100dp" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs_community"
@@ -34,11 +34,23 @@
             android:id="@+id/viewpager_community"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabs_community"
-            android:layout_marginTop="100dp"/>
+            android:layout_marginTop="100dp"
+            app:layout_constraintTop_toBottomOf="@+id/tabs_community" />
 
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_write"
+            android:text="글쓰기"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:src="@drawable/ic_writing"
+            app:layout_constraintBottom_toBottomOf="@id/viewpager_community"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 </FrameLayout>
