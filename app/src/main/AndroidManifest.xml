@@ -11,7 +11,7 @@
         android:theme="@style/Theme.Danjinae">
         <activity
             android:name=".FreeBoardActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">
