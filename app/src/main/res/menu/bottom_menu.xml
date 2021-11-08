@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:title="게시판"
+        android:enabled="true"
+        android:id="@+id/menu_community"
+        android:icon="@drawable/ic_baseline_community"/>
+
+    <item
+        android:title="차량관리"
+        android:enabled="true"
+        android:id="@+id/menu_car"
+        android:icon="@drawable/ic_baseline_car"/>
+
+    <item
+        android:title="Home"
+        android:enabled="true"
+        android:id="@+id/menu_home"
+        android:icon="@drawable/ic_baseline_home"/>
+
+    <item
+        android:title="관리비"
+        android:enabled="true"
+        android:id="@+id/menu_management_fee"
+        android:icon="@drawable/ic_baseline_managementfee"/>
+
+    <item
+        android:title="민원"
+        android:enabled="true"
+        android:id="@+id/menu_complaint"
+        android:icon="@drawable/ic_baseline_complaint"/>
+
+
+
+</menu>

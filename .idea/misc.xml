@@ -4,9 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/hojin/AndroidStudioProjects/Danjinae/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/hojin/AndroidStudioProjects/Danjinae/app/src/main/res/drawable/ic_baseline_complaint.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/hojin/AndroidStudioProjects/Danjinae/app/src/main/res/drawable/ic_baseline_directions_car.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/hojin/AndroidStudioProjects/Danjinae/app/src/main/res/drawable/ic_baseline_mangamentfee.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/hojin/AndroidStudioProjects/Danjinae/app/src/main/res/drawable/ic_launcher_background.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/hojin/AndroidStudioProjects/Danjinae/app/src/main/res/layout/activity_main.xml" value="0.182518115942029" />
         <entry key="..\:/Users/hojin/AndroidStudioProjects/Danjinae/app/src/main/res/layout/activity_splash.xml" value="0.1859375" />
+        <entry key="..\:/Users/hojin/AndroidStudioProjects/Danjinae/app/src/main/res/layout/fragment_car.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/hojin/AndroidStudioProjects/Danjinae/app/src/main/res/layout/fragment_community.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/hojin/AndroidStudioProjects/Danjinae/app/src/main/res/layout/fragment_complaint.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/hojin/AndroidStudioProjects/Danjinae/app/src/main/res/layout/fragment_home.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/hojin/AndroidStudioProjects/Danjinae/app/src/main/res/layout/fragment_mangement_fee.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/hojin/AndroidStudioProjects/Danjinae/app/src/main/res/layout/toolbar.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/hojin/AndroidStudioProjects/Danjinae/app/src/main/res/menu/bottom_menu.xml" value="0.20052083333333334" />
       </map>
     </option>
   </component>
