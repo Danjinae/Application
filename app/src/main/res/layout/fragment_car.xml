@@ -1,14 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CarFragment">
+    tools:context=".CarFragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="car" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/text_cartitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="차량조회"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:layout_margin="20dp"
+            android:layout_alignParentTop="true"/>
+
+        <EditText
+            android:id="@+id/edt_car"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="차량번호를 입력하세요."
+            android:layout_marginLeft="20dp"
+            android:layout_below="@id/text_cartitle"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/edt_car"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="31dp"
+            android:text="조회" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:id="@+id/text_guestcar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="방문차량 현황"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:layout_margin="20dp"
+            android:layout_alignParentTop="true"/>
+
+        <Button
+            android:id="@+id/bt_guestcar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="방문차량 등록"/>
+    </RelativeLayout>
+
+</LinearLayout>
