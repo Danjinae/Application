@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.iamport.sdk.domain.core.Iamport
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,4 +41,5 @@ class MainActivity : AppCompatActivity() {
     private fun replaceFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().replace(frame_l.id, fragment).commit()
     }
+
 }
