@@ -39,7 +39,6 @@ class CarRegistrationFragment : DialogFragment() {
         btnCarCancel = binding.btnCarCancel
         carNum = binding.editCarNum
         carPhone = binding.editCarPhone
-        var timestamp = System.currentTimeMillis()
         val guestCar = GuestVehicleModel()
 
         btnCarInput.setOnClickListener {
