@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".CarRegistrationFragment"
+    android:id="@+id/frame_car"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_car"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="차의 번호를 입력해주세요"/>
+
+    <TextView
+        android:id="@+id/text_carNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="차량번호"
+        android:layout_below="@+id/text_car"
+        android:layout_marginTop="50dp"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <EditText
+        android:id="@+id/edit_carNum"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_car"
+        android:layout_marginTop="50dp"
+        android:layout_toRightOf="@+id/text_carNum" />
+
+    <TextView
+        android:id="@+id/text_carPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_carNum"
+        android:layout_marginTop="50dp"
+        android:text="연락처"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <EditText
+        android:id="@+id/edit_carPhone"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_carNum"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="50dp"
+        android:layout_toRightOf="@+id/text_carPhone"
+        tools:layout_editor_absoluteY="110dp" />
+
+    <Button
+        android:id="@+id/btn_carInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_carPhone"
+        android:text="등록" />
+
+    <Button
+        android:id="@+id/btn_carCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_carPhone"
+        android:layout_marginLeft="47dp"
+        android:layout_toRightOf="@+id/btn_carInput"
+        android:text="취소" />
+
+</RelativeLayout>
