@@ -13,6 +13,7 @@ import com.danjinae.vo.GuestVehicleModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.sql.Timestamp
 
 class CarRegistrationFragment : DialogFragment() {
     val TAG = "carDialog"
@@ -20,6 +21,7 @@ class CarRegistrationFragment : DialogFragment() {
     lateinit var btnCarCancel: Button
     lateinit var carNum: EditText
     lateinit var carPhone: EditText
+    lateinit var timestamp: Timestamp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,19 +39,25 @@ class CarRegistrationFragment : DialogFragment() {
         btnCarCancel = binding.btnCarCancel
         carNum = binding.editCarNum
         carPhone = binding.editCarPhone
+        var timestamp = System.currentTimeMillis()
+        val guestCar = GuestVehicleModel()
 
         btnCarInput.setOnClickListener {
-            val call: Call<GuestVehicleModel> = RetrofitClient.networkService.postVehicleGuest(
-                carNum.text.toString(),
-                carPhone.text.toString(),
-                0
-            )
+            guestCar.userId = 0
+            guestCar.number = carNum.text.toString()
+            guestCar.phone = carPhone.text.toString()
+            val call: Call<GuestVehicleModel> = RetrofitClient.networkService.postVehicleGuest(guestCar)
+            //Log.d("2",RetrofitClient.networkService.postComment())
             call.enqueue(object : Callback<GuestVehicleModel> {
                 override fun onResponse(
                     call: Call<GuestVehicleModel>,
                     response: Response<GuestVehicleModel>
                 ) {
+                    if(response.isSuccessful()){
                     Log.d(TAG, "성공 : ${response.raw()}")
+                    } else{
+                        Log.d(TAG, "실패 : ${response.errorBody()?.string()!!}")
+                    }
                 }
 
                 override fun onFailure(call: Call<GuestVehicleModel>, t: Throwable) {
