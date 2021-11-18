@@ -18,6 +18,12 @@ interface RetrofitService {
     @GET("/comment/list")
     fun getComment(): retrofit2.Call<CommentModel>
 
+    @Headers("Content-Type: application/json")
+    @POST("/post/add")
+    fun addPost(
+        @Body post: PostModel
+    ): Call<PostModel>
+
     @POST("/vehicle/guest")
     @Headers("Content-Type: application/json")
     fun postVehicleGuest(
@@ -28,11 +34,4 @@ interface RetrofitService {
     fun getVehicleInfo(
         @Query("number") number: String
     ): Call<GuestVehicleModel>
-
-    @Headers("Content-Type: application/json")
-    @POST("/post/add")
-    fun addPost(
-        @Body post: PostModel
-    ): Call<PostModel>
-
 }

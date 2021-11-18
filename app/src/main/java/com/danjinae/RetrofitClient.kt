@@ -23,18 +23,6 @@ object RetrofitClient : Application() {
             .writeTimeout(30, TimeUnit.SECONDS)
             .build()
     }
-
-
-
-//
-//
-//    var okHttpClient: OkHttpClient = OkHttpClient.Builder()
-//        .connectTimeout(30, TimeUnit.MINUTES)
-//        .readTimeout(30, TimeUnit.SECONDS)
-//        .writeTimeout(30, TimeUnit.SECONDS)
-//        .build()
-
-
     val retrofit: Retrofit
         get() = Retrofit.Builder()
             .baseUrl("http://101.101.219.69:8080/")

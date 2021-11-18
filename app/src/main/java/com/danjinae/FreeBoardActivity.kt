@@ -1,11 +1,13 @@
 package com.danjinae
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.danjinae.databinding.ActivityFreeBoardBinding
+import com.danjinae.databinding.FragmentCommunityBinding
+import com.danjinae.databinding.FragmentFreeBoardBinding
 import com.danjinae.vo.PostModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -13,21 +15,21 @@ import retrofit2.Response
 
 class FreeBoardActivity : AppCompatActivity() {
     lateinit var binding: ActivityFreeBoardBinding
-    lateinit var btnPost: Button
+    lateinit var reCycleBinding: FragmentFreeBoardBinding
+    lateinit var frameBinding: FragmentCommunityBinding
     lateinit var postTitle: EditText
     lateinit var postContent: EditText
-    val data = arrayListOf<Post>()
-    lateinit var adapter: BoardAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityFreeBoardBinding.inflate(layoutInflater)
+        reCycleBinding = FragmentFreeBoardBinding.inflate(layoutInflater)
+        frameBinding = FragmentCommunityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         var postModel = PostModel()
         postTitle = binding.editPostTitle
         postContent = binding.editPostContents
-
-        Log.d("등록", postTitle.text.toString())
 
         binding.btnPost.setOnClickListener {
             Log.d("등록", "진입")
@@ -35,6 +37,9 @@ class FreeBoardActivity : AppCompatActivity() {
             postModel.content = postContent.text.toString()
             postModel.title =  postTitle.text.toString()
             postModel.userId = 4
+
+            var intent = Intent().putExtra("post",postModel)
+            setResult(RESULT_OK,intent)
 
             val call: Call<PostModel> = RetrofitClient.networkService.addPost(postModel)
             call.enqueue(object : Callback<PostModel> {
@@ -45,14 +50,12 @@ class FreeBoardActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         Log.d("조회", "성공 : ${response.raw()}")
                     }
-                    Log.d("조회2", "실패 : ${response.errorBody()?.string()!!}")
+                    Log.d("조회", "실패 : ${response.errorBody()?.string()!!}")
                 }
-
                 override fun onFailure(call: Call<PostModel>, t: Throwable) {
-                    Log.d("조회3", "실패 : $t")
+                    Log.d("조회", "실패 : $t")
                 }
             })
         }
-
     }
 }
