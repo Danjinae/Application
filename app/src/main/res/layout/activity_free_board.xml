@@ -8,19 +8,19 @@
 
     <EditText
         android:layout_margin="10dp"
-        android:id="@+id/edt_post_title"
+        android:id="@+id/edit_post_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="제목을 입력하세요."/>
 
     <EditText
         android:layout_margin="10dp"
-        android:id="@+id/edt_post_contents"
+        android:id="@+id/edit_post_contents"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:hint="내용을 입력하세요."
         android:layout_above="@id/btn_post"
-        android:layout_below="@+id/edt_post_title"/>
+        android:layout_below="@+id/edit_post_title"/>
 
     <Button
         android:id="@+id/btn_post"

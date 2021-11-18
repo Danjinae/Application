@@ -6,11 +6,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".FreeBoardFragment">
 
-    <TextView
-        android:id="@+id/textView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/board_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="게시판" />
+        android:orientation="vertical"/>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -23,8 +23,8 @@
         android:baselineAlignBottom="true"
         android:src="@drawable/ic_writing"
         android:text="글쓰기"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintBottom_toBottomOf="@+id/board_recyclerView"
+        app:layout_constraintEnd_toEndOf="@+id/board_recyclerView"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
