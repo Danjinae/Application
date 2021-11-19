@@ -1,11 +1,15 @@
-package com.danjinae
+package com.danjinae.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.danjinae.R
+import com.danjinae.view.car.CarFragment
+import com.danjinae.view.community.CommunityFragment
+import com.danjinae.view.complain.ComplaintFragment
+import com.danjinae.view.fee.ManagementFeeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.iamport.sdk.domain.core.Iamport
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,7 +33,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.menu_car -> CarFragment()
                     R.id.menu_community -> CommunityFragment()
                     R.id.menu_home -> HomeFragment()
-                    R.id.menu_management_fee -> MangementFeeFragment()
+                    R.id.menu_management_fee -> ManagementFeeFragment()
                     else -> ComplaintFragment()
                 }
 

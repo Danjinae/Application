@@ -1,4 +1,4 @@
-package com.danjinae
+package com.danjinae.view.community
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.danjinae.databinding.ActivityFreeBoardBinding
 import com.danjinae.databinding.FragmentCommunityBinding
 import com.danjinae.databinding.FragmentFreeBoardBinding
+import com.danjinae.network.RetrofitClient
 import com.danjinae.vo.PostModel
 import retrofit2.Call
 import retrofit2.Callback

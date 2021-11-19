@@ -1,4 +1,4 @@
-package com.danjinae
+package com.danjinae.view.community
 
 import android.app.Activity
 import android.content.Intent
@@ -11,6 +11,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.danjinae.BoardAdapter
 import com.danjinae.databinding.FragmentFreeBoardBinding
 import com.danjinae.vo.PostModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton

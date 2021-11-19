@@ -1,4 +1,4 @@
-package com.danjinae
+package com.danjinae.network
 
 import android.app.Application
 import okhttp3.OkHttpClient

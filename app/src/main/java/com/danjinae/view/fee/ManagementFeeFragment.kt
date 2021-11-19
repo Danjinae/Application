@@ -1,25 +1,22 @@
-package com.danjinae
+package com.danjinae.view.fee
 
-import android.content.Context
-import android.content.Intent
-import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
+import com.danjinae.R
 import com.google.android.material.snackbar.Snackbar
-import com.iamport.sdk.data.sdk.*
+import com.iamport.sdk.data.sdk.IamPortRequest
+import com.iamport.sdk.data.sdk.PG
+import com.iamport.sdk.data.sdk.PayMethod
 import com.iamport.sdk.domain.core.Iamport
-import kotlinx.coroutines.GlobalScope
 import java.util.*
 
 
-class MangementFeeFragment : Fragment() {
+class ManagementFeeFragment : Fragment() {
 
     private lateinit var btpay: Button
 
@@ -40,13 +37,6 @@ class MangementFeeFragment : Fragment() {
 
         Iamport.init(this)
 
-        return view
-    }
-
-
-    override fun onStart() {
-        super.onStart()
-
         val request = IamPortRequest(
             pg = PG.html5_inicis.makePgRawName(),
             pay_method = PayMethod.card.name,
@@ -66,6 +56,34 @@ class MangementFeeFragment : Fragment() {
                     })
                 }.show()
         }
+        return view
     }
-
 }
+
+
+//    override fun onStart() {
+//        super.onStart()
+//
+//        Iamport.init(this)
+//        val request = IamPortRequest(
+//            pg = PG.html5_inicis.makePgRawName(),
+//            pay_method = PayMethod.card.name,
+//            name = "아파트 관리비",
+//            merchant_uid = "sample_aos_${Date().time}",
+//            amount = "1000",
+//            buyer_name = "hojin"
+//        )
+//
+//        btpay.setOnClickListener { view ->
+//            Snackbar.make(view, "결제시도", Snackbar.LENGTH_LONG)
+//                .setAction("결제") {
+//
+//                    Log.d("", "결제시작")
+//                    Iamport.payment("imp60685235", iamPortRequest = request, paymentResultCallback = {
+//                        //Toast.makeText(this, "결제결과 => $it", Toast.LENGTH_LONG).show()
+//                    })
+//                }.show()
+//        }
+//    }
+
+

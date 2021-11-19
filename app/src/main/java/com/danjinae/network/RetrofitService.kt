@@ -1,4 +1,4 @@
-package com.danjinae
+package com.danjinae.network
 
 import com.danjinae.vo.CommentModel
 import com.danjinae.vo.GuestVehicleModel
