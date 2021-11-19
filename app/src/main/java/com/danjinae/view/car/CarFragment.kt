@@ -33,27 +33,13 @@ class CarFragment : Fragment() {
         carNum = binding.edtCar
 
         btnCarSearch.setOnClickListener {
-//            val call: Call<PostModel> = RetrofitClient.networkService.addPost(PostModel())
-//            call.enqueue(object : Callback<PostModel> {
-//                override fun onResponse(
-//                    call: Call<PostModel>,
-//                    response: Response<PostModel>
-//                ) {
-//                    if (response.isSuccessful) {
-//                        Log.d("조회", "성공 : ${response.raw()}")
-//                    }
-//                    Log.d("조회2", "실패 : ${response.errorBody()?.string()!!}")
-//                }
-//
-//                override fun onFailure(call: Call<PostModel>, t: Throwable) {
-//                    Log.d("조회3", "실패 : $t")
-//                }
-//            })
+            var dialogCarSearch = CarSearchFragment()
+            dialogCarSearch.show(childFragmentManager, "carSearchDialog")
         }
 
         btnGuestCar.setOnClickListener {
-            var dialog = CarRegistrationFragment()
-            dialog.show(childFragmentManager, "carDialog")
+            var dialogCarRegistration = CarRegistrationFragment()
+            dialogCarRegistration.show(childFragmentManager, "carRegistrationDialog")
         }
         return binding.root
     }
