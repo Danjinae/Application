@@ -26,14 +26,17 @@ class CarFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val binding = FragmentCarBinding.inflate(inflater, container, false)
+        var bundle = Bundle()
         btnCarSearch = binding.btnCarSerch
         btnGuestCar = binding.btGuestCar
         carNum = binding.edtCar
 
+        bundle.putString("carNum",carNum.toString())
+
         btnCarSearch.setOnClickListener {
             var dialogCarSearch = CarSearchFragment()
+            dialogCarSearch.arguments = bundle
             dialogCarSearch.show(childFragmentManager, "carSearchDialog")
         }
 

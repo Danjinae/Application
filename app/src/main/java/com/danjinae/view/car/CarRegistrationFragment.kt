@@ -1,5 +1,6 @@
 package com.danjinae.view.car
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.danjinae.databinding.FragmentCarRegistrationBinding
 import com.danjinae.network.RetrofitClient
@@ -14,15 +16,20 @@ import com.danjinae.vo.GuestVehicleModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.sql.Timestamp
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class CarRegistrationFragment : DialogFragment() {
-    val TAG = "carDialog"
+    val TAG = "carRegisrationtDialog"
+    val guestCar = GuestVehicleModel()
+    lateinit var datePicker: DatePickerHelper
     lateinit var btnCarInput: Button
     lateinit var btnCarCancel: Button
     lateinit var carNum: EditText
     lateinit var carPhone: EditText
-    lateinit var timestamp: Timestamp
+    lateinit var carDate: TextView
+    val a: Activity? = activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,27 +42,37 @@ class CarRegistrationFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentCarRegistrationBinding.inflate(inflater, container, false)
-        val guestCar = GuestVehicleModel()
         btnCarInput = binding.btnCarInput
         btnCarCancel = binding.btnCarCancel
         carNum = binding.editCarNum
         carPhone = binding.editCarPhone
+        carDate = binding.textCarDate
+        val timeNow = System.currentTimeMillis()
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val dateNow = dateFormat.format(timeNow)
+        //val dateEnd = dateFormat.format(carDate.text)
+        datePicker = DatePickerHelper(requireContext(),true)
+        carDate.setOnClickListener {
+            showDatePickerDialog()
+        }
 
         btnCarInput.setOnClickListener {
-            guestCar.userId = 0
+            guestCar.userId = 6
+            guestCar.startDate = dateNow
+            guestCar.endDate = carDate.text.toString()
             guestCar.number = carNum.text.toString()
             guestCar.phone = carPhone.text.toString()
-            val call: Call<GuestVehicleModel> = RetrofitClient.networkService.postVehicleGuest(guestCar)
+
+            val call: Call<GuestVehicleModel> =
+                RetrofitClient.networkService.postVehicleGuest(guestCar)
             call.enqueue(object : Callback<GuestVehicleModel> {
                 override fun onResponse(
                     call: Call<GuestVehicleModel>,
                     response: Response<GuestVehicleModel>
                 ) {
-                    val data = response.body()
-                    Log.d(TAG, "성공 : $data")
-                    if(response.isSuccessful){
-                    Log.d(TAG, "성공 : ${response.raw()}")
-                    } else{
+                    if (response.isSuccessful) {
+                        Log.d(TAG, "성공 : ${response.body()}")
+                    } else {
                         Log.d(TAG, "실패 : ${response.errorBody()?.string()!!}")
                     }
                 }
@@ -66,9 +83,24 @@ class CarRegistrationFragment : DialogFragment() {
             dismiss()
         }
 
-        btnCarCancel.setOnClickListener{
+        btnCarCancel.setOnClickListener {
             dismiss()
         }
         return binding.root
+    }
+
+    private fun showDatePickerDialog() {
+        val cal = Calendar.getInstance()
+        val d = cal.get(Calendar.DAY_OF_MONTH)
+        val m = cal.get(Calendar.MONTH)
+        val y = cal.get(Calendar.YEAR)
+        datePicker.showDialog(d, m, y, object : DatePickerHelper.Callback {
+            override fun onDateSelected(dayofMonth: Int, month: Int, year: Int) {
+                val dayStr = if (dayofMonth < 10) "0${dayofMonth}" else "${dayofMonth}"
+                val mon = month + 1
+                val monthStr = if (mon < 10) "0${mon}" else "${mon}"
+                carDate.text = "${year}-${monthStr}-${dayStr}"
+            }
+        })
     }
 }
