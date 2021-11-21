@@ -13,8 +13,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.danjinae.BoardAdapter
 import com.danjinae.databinding.FragmentFreeBoardBinding
+import com.danjinae.network.RetrofitClient
+import com.danjinae.vo.CommentModel
 import com.danjinae.vo.PostModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class FreeBoardFragment : Fragment() {
@@ -40,6 +45,24 @@ class FreeBoardFragment : Fragment() {
         binding.boardRecyclerView.layoutManager = layoutManager
         binding.boardRecyclerView.adapter = boardAdapter
 
+//        val call: Call<PostList> = RetrofitClient.networkService.getPostList()
+//        call.enqueue(object : Callback<PostList> {
+//            override fun onResponse(
+//                call: Call<PostList>,
+//                response: Response<PostList>
+//            ) {
+//                //val reusltData: Result = response.body()
+//                Log.d("데이터","데이터")
+//                if (response.isSuccessful) {
+//                    Log.d("조회", "성공 : ${response.raw()}")
+//                }
+//                Log.d("조회", "실패 : ${response.errorBody()?.string()!!}")
+//            }
+//            override fun onFailure(call: Call<PostList>, t: Throwable) {
+//                Log.d("조회", "실패 : $t")
+//            }
+//        })
+
         resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == Activity.RESULT_OK){
                postModel = it.data?.getParcelableExtra("post")!!
@@ -53,12 +76,32 @@ class FreeBoardFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        Log.d("post!!",datas.toString())
         addFAB.setOnClickListener {
             onResume()
             val intent = Intent(this.context, FreeBoardActivity::class.java)
             resultLauncher.launch(intent)
         }
+
+        //var a: CommentModel
+        var a = CommentModel()
+        a.comment = "a"
+        a.userId = 0
+        val call: Call<Boolean> = RetrofitClient.networkService.postComment(a,1)
+        call.enqueue(object : Callback<Boolean>{
+            override fun onResponse(
+                call: Call<Boolean>,
+                response: Response<Boolean>
+            ){
+                if(response.isSuccessful){
+                    Log.d("1","1")
+                } else{
+                    Log.d("2","2")
+                }
+            }
+            override fun onFailure(call: Call<Boolean>, t: Throwable) {
+                Log.d("조회", "실패 : $t")
+            }
+        })
     }
 }
 

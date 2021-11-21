@@ -1,8 +1,6 @@
 package com.danjinae.network
 
-import com.danjinae.vo.CommentModel
-import com.danjinae.vo.GuestVehicleModel
-import com.danjinae.vo.PostModel
+import com.danjinae.vo.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -13,7 +11,7 @@ interface RetrofitService {
     fun postComment(
         @Body comment: CommentModel,
         @Query("postId") postId: Int
-    ): Call<CommentModel>
+    ): Call<Boolean>
 
     @GET("/comment/list")
     fun getComment(): retrofit2.Call<CommentModel>
@@ -22,16 +20,19 @@ interface RetrofitService {
     @POST("/post/add")
     fun addPost(
         @Body post: PostModel
-    ): Call<PostModel>
+    ): Call<Boolean>
 
+    @GET("/post/total-list")
+    fun getPostList(): Call<List<PostList>>
+
+    @Headers("Content-Type: application/json","Connection: Keep-alive")
     @POST("/vehicle/guest")
-    @Headers("Content-Type: application/json")
     fun postVehicleGuest(
-        @Body vehicleModel: GuestVehicleModel
-        ): Call<GuestVehicleModel>
+        @Body vehicle: GuestVehicleModel
+        ): Call<List<GuestVehicleModel>>
 
     @GET("/vehicle/select/info")
     fun getVehicleInfo(
-        @Query("number") number: String
-    ): Call<GuestVehicleModel>
+        @Query("vehicleId") vehicleId: Int
+    ): Call<VehicleInfo>
 }
