@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.danjinae.BoardAdapter
 import com.danjinae.databinding.FragmentFreeBoardBinding
 import com.danjinae.network.RetrofitClient
-import com.danjinae.vo.CommentModel
+import com.danjinae.vo.PostList
 import com.danjinae.vo.PostModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.Call
@@ -82,15 +82,11 @@ class FreeBoardFragment : Fragment() {
             resultLauncher.launch(intent)
         }
 
-        //var a: CommentModel
-        var a = CommentModel()
-        a.comment = "a"
-        a.userId = 0
-        val call: Call<Boolean> = RetrofitClient.networkService.postComment(a,1)
-        call.enqueue(object : Callback<Boolean>{
+        val call: Call<PostList> = RetrofitClient.networkService.getPostList()
+        call.enqueue(object : Callback<PostList>{
             override fun onResponse(
-                call: Call<Boolean>,
-                response: Response<Boolean>
+                call: Call<PostList>,
+                response: Response<PostList>
             ){
                 if(response.isSuccessful){
                     Log.d("1","1")
@@ -98,7 +94,7 @@ class FreeBoardFragment : Fragment() {
                     Log.d("2","2")
                 }
             }
-            override fun onFailure(call: Call<Boolean>, t: Throwable) {
+            override fun onFailure(call: Call<PostList>, t: Throwable) {
                 Log.d("조회", "실패 : $t")
             }
         })
