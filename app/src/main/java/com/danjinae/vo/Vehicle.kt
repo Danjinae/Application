@@ -3,15 +3,17 @@ package com.danjinae.vo
 import android.os.Parcel
 import android.os.Parcelable
 
-data class GuestVehicleModel (
-    var userId: Int = 0,
+data class Vehicle (
+    var endDate: String? = null,
+    var number: String? = null,
     var phone: String? = null,
-    var number: String? = null
+    var startDate: String? = null,
+    var userId: Int = 0
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
-        parcel.readString(),
-        parcel.readString()
+        //parcel.readInt(),
+        //parcel.readString(),
+        //parcel.readString()
     ) {
     }
 
@@ -25,12 +27,12 @@ data class GuestVehicleModel (
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<GuestVehicleModel> {
-        override fun createFromParcel(parcel: Parcel): GuestVehicleModel {
-            return GuestVehicleModel(parcel)
+    companion object CREATOR : Parcelable.Creator<Vehicle> {
+        override fun createFromParcel(parcel: Parcel): Vehicle {
+            return Vehicle(parcel)
         }
 
-        override fun newArray(size: Int): Array<GuestVehicleModel?> {
+        override fun newArray(size: Int): Array<Vehicle?> {
             return arrayOfNulls(size)
         }
     }

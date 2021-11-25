@@ -10,25 +10,39 @@
 
     <TextView
         android:id="@+id/text_car"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="차량 정보와 날짜를 입력해주세요"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/text_carDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="차의 번호를 입력해주세요"/>
+        android:layout_below="@+id/text_car"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="65dp"
+        android:text="날짜 설정하기"
+        android:textSize="30dp" />
 
     <TextView
         android:id="@+id/text_carNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/text_carDate"
+        android:layout_marginTop="30dp"
         android:text="차량번호"
-        android:layout_below="@+id/text_car"
-        android:layout_marginTop="50dp"
-        tools:layout_editor_absoluteX="16dp" />
+      />
 
     <EditText
+        android:textSize="10dp"
         android:id="@+id/edit_carNum"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/text_car"
-        android:layout_marginTop="50dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/edit_carPhone"
+        android:layout_below="@id/text_carDate"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/text_carNum" />
 
     <TextView
@@ -45,8 +59,8 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_carNum"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginTop="33dp"
         android:layout_toRightOf="@+id/text_carPhone"
         tools:layout_editor_absoluteY="110dp" />
 
@@ -55,6 +69,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edit_carPhone"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
         android:text="등록" />
 
     <Button
@@ -64,6 +80,7 @@
         android:layout_below="@+id/edit_carPhone"
         android:layout_marginLeft="47dp"
         android:layout_toRightOf="@+id/btn_carInput"
+        android:layout_marginTop="15dp"
         android:text="취소" />
 
 </RelativeLayout>
