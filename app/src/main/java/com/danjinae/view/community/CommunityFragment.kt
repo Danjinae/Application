@@ -29,7 +29,6 @@ class CommunityFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view:View = inflater.inflate(R.layout.fragment_community, container, false)
         viewPager = view.findViewById(R.id.viewpager_community)
         tabLayout = view.findViewById(R.id.tabs_community)
@@ -41,7 +40,6 @@ class CommunityFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val pagerAdapter = CommunityAdapter(requireActivity())
-//        pagerAdapter.notifyDataSetChanged()
         viewPager?.adapter = pagerAdapter
         viewPager?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int){
