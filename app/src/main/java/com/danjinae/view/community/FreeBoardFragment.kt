@@ -14,19 +14,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.danjinae.BoardAdapter
 import com.danjinae.databinding.FragmentFreeBoardBinding
 import com.danjinae.network.RetrofitClient
+import com.danjinae.vo.Post
 import com.danjinae.vo.PostList
-import com.danjinae.vo.PostModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 
 class FreeBoardFragment : Fragment() {
     lateinit var resultLauncher: ActivityResultLauncher<Intent>
     lateinit var addFAB: FloatingActionButton
-    val datas = mutableListOf<PostModel>()
-    var postModel = PostModel()
+    var datas = mutableListOf<Post>()
+    var postModel = Post()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,23 +46,30 @@ class FreeBoardFragment : Fragment() {
         binding.boardRecyclerView.layoutManager = layoutManager
         binding.boardRecyclerView.adapter = boardAdapter
 
-//        val call: Call<PostList> = RetrofitClient.networkService.getPostList()
-//        call.enqueue(object : Callback<PostList> {
-//            override fun onResponse(
-//                call: Call<PostList>,
-//                response: Response<PostList>
-//            ) {
-//                //val reusltData: Result = response.body()
-//                Log.d("데이터","데이터")
-//                if (response.isSuccessful) {
-//                    Log.d("조회", "성공 : ${response.raw()}")
-//                }
-//                Log.d("조회", "실패 : ${response.errorBody()?.string()!!}")
-//            }
-//            override fun onFailure(call: Call<PostList>, t: Throwable) {
-//                Log.d("조회", "실패 : $t")
-//            }
-//        })
+            val call: Call<PostList> = RetrofitClient.networkService.getPostList()
+            call.enqueue(object : Callback<PostList> {
+                override fun onResponse(
+                    call: Call<PostList>,
+                    response: Response<PostList>
+                ){
+                    if(response.isSuccessful){
+                        var dataList: ArrayList<Post>? = response.body()?.content
+                        if (dataList != null && dataList.size > 0) {
+                            for(i in 0 until dataList.size){
+                                datas.add(dataList[i])
+                            }
+                            Log.d("데이터",datas.toString())
+                            boardAdapter.notifyDataSetChanged()
+                        }
+                    } else{
+                        Log.d("2","2")
+                    }
+                }
+                override fun onFailure(call: Call<PostList>, t: Throwable) {
+                    Log.d("조회", "실패 : $t")
+                }
+            })
+
 
         resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == Activity.RESULT_OK){
@@ -81,23 +89,6 @@ class FreeBoardFragment : Fragment() {
             val intent = Intent(this.context, FreeBoardActivity::class.java)
             resultLauncher.launch(intent)
         }
-
-        val call: Call<PostList> = RetrofitClient.networkService.getPostList()
-        call.enqueue(object : Callback<PostList>{
-            override fun onResponse(
-                call: Call<PostList>,
-                response: Response<PostList>
-            ){
-                if(response.isSuccessful){
-                    Log.d("1","1")
-                } else{
-                    Log.d("2","2")
-                }
-            }
-            override fun onFailure(call: Call<PostList>, t: Throwable) {
-                Log.d("조회", "실패 : $t")
-            }
-        })
     }
 }
 

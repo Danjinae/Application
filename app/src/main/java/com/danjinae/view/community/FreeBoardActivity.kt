@@ -9,7 +9,7 @@ import com.danjinae.databinding.ActivityFreeBoardBinding
 import com.danjinae.databinding.FragmentCommunityBinding
 import com.danjinae.databinding.FragmentFreeBoardBinding
 import com.danjinae.network.RetrofitClient
-import com.danjinae.vo.PostModel
+import com.danjinae.vo.Post
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,7 +28,7 @@ class FreeBoardActivity : AppCompatActivity() {
         frameBinding = FragmentCommunityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var postModel = PostModel()
+        var postModel = Post()
         postTitle = binding.editPostTitle
         postContent = binding.editPostContents
 
@@ -37,23 +37,22 @@ class FreeBoardActivity : AppCompatActivity() {
             postModel.aptId = 1
             postModel.content = postContent.text.toString()
             postModel.title =  postTitle.text.toString()
-            postModel.userId = 4
+            postModel.userId = 1
 
             var intent = Intent().putExtra("post",postModel)
             setResult(RESULT_OK,intent)
 
-            val call: Call<PostModel> = RetrofitClient.networkService.addPost(postModel)
-            call.enqueue(object : Callback<PostModel> {
+            val call: Call<Boolean> = RetrofitClient.networkService.addPost(postModel)
+            call.enqueue(object : Callback<Boolean>{
                 override fun onResponse(
-                    call: Call<PostModel>,
-                    response: Response<PostModel>
+                    call: Call<Boolean>,
+                    response: Response<Boolean>
                 ) {
                     if (response.isSuccessful) {
                         Log.d("조회", "성공 : ${response.raw()}")
-                    }
-                    Log.d("조회", "실패 : ${response.errorBody()?.string()!!}")
+                    }else Log.d("조회", "실패 : ${response.errorBody()}")
                 }
-                override fun onFailure(call: Call<PostModel>, t: Throwable) {
+                override fun onFailure(call: Call<Boolean>, t: Throwable) {
                     Log.d("조회", "실패 : $t")
                 }
             })

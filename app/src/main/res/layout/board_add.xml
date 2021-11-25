@@ -8,6 +8,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_postItem"
         android:layout_width="match_parent"
         android:layout_height="140dp">
 
@@ -15,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp"
-            android:background="#DDAEAE">
+            android:background="#FAF2F2">
 
             <TextView
                 android:id="@+id/board_title"

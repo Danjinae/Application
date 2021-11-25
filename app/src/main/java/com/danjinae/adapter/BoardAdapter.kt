@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.danjinae.databinding.BoardAddBinding
 import com.danjinae.view.community.BoardInfoActivity
-import com.danjinae.vo.PostModel
+import com.danjinae.vo.Post
 
 
 class BoardViewHolder(val binding: BoardAddBinding): RecyclerView.ViewHolder(binding.root){
 }
 
-class BoardAdapter(val data: MutableList<PostModel>): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class BoardAdapter(val data: MutableList<Post>): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+    var idx: Int = 0
     private var context: Context? = null
 
     fun BoardAdapter(context: Context){
