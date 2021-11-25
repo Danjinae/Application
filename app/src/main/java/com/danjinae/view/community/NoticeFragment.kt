@@ -1,25 +1,26 @@
 package com.danjinae.view.community
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.danjinae.R
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.danjinae.adapter.NoticeAdapter
+import com.danjinae.databinding.FragmentNoticeBinding
+import com.danjinae.network.RetrofitClient
+import com.danjinae.vo.Notice
+import com.danjinae.vo.NoticeListResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class NoticeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
         }
     }
 
@@ -27,19 +28,37 @@ class NoticeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notice, container, false)
-    }
+        val binding = FragmentNoticeBinding.inflate(inflater, container, false)
+        val layoutManager = LinearLayoutManager(context)
+        val noticeAdapter = NoticeAdapter()
 
-    companion object {
+        binding.recycleNotice.layoutManager = layoutManager
+        binding.recycleNotice.adapter = noticeAdapter
+        noticeAdapter.notifyDataSetChanged()
 
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            NoticeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        Log.d("공지","진입")
+
+            val call: Call<Notice> = RetrofitClient.networkService.getNoticeList(10)
+            call.enqueue(object : Callback<Notice> {
+                override fun onResponse(
+                    call: Call<Notice>,
+                    response: Response<Notice>
+                ) {
+                    if (response.isSuccessful) {
+                        var dataList: MutableList<NoticeListResponse>? = response.body()?.content
+                        var content = dataList?.get(0)?.content
+                        Log.d("데이터1",content.toString())
+                        if (dataList != null) {
+                            noticeAdapter.noticeData = dataList
+                            noticeAdapter.notifyDataSetChanged()
+                        }
+
+                    }else Log.d("조회", "실패 : ${response.errorBody()}")
+                }override fun onFailure(call: Call<Notice>, t: Throwable) {
+                    Log.d("조회", "실패 : $t")
                 }
-            }
+            })
+
+        return binding.root
     }
 }

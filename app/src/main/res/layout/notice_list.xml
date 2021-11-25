@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/cardview_compat_inset_shadow">
+
+        <TextView
+            android:paddingStart="20dp"
+            android:background="#FAF2F2"
+            android:id="@+id/notice_item"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="공지"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"/>
+
+</androidx.cardview.widget.CardView>
