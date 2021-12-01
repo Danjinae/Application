@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.AptAuthActivity">
+
+    <TextView
+        android:id="@+id/text_joinMember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="회원가입"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_aptAuth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="아파트 인증"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/text_joinMember"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/text_joinMember"
+        app:layout_constraintTop_toBottomOf="@id/text_joinMember" />
+
+    <EditText
+        android:id="@+id/edit_choiceApt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:hint="아파트를 선택해주세요"
+        app:layout_constraintEnd_toEndOf="@+id/text_aptAuth"
+        app:layout_constraintStart_toStartOf="@+id/text_aptAuth"
+        app:layout_constraintTop_toBottomOf="@+id/text_aptAuth" />
+
+    <EditText
+        android:id="@+id/edit_dong"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/edit_ho"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/edit_choiceApt"
+        app:layout_constraintTop_toBottomOf="@+id/edit_choiceApt"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="동"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_dong"
+        app:layout_constraintEnd_toEndOf="@+id/edit_dong"
+        app:layout_constraintTop_toTopOf="@+id/edit_dong" />
+
+    <EditText
+        android:id="@+id/edit_ho"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_choiceApt" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="호"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_ho"
+        app:layout_constraintEnd_toEndOf="@+id/edit_ho"
+        app:layout_constraintTop_toTopOf="@+id/edit_ho" />
+</androidx.constraintlayout.widget.ConstraintLayout>
