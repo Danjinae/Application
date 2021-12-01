@@ -1,10 +1,13 @@
 package com.danjinae.view
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.telephony.SmsManager
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -15,8 +18,7 @@ import kotlin.random.Random
 class AuthenticationActivity : AppCompatActivity() {
     val TAG = "본인인증"
     val SMS_SEND_PERMISSION = 1
-    lateinit var num: String
-
+    var num: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityAuthenticationBinding.inflate(layoutInflater)
@@ -25,23 +27,19 @@ class AuthenticationActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Log.d(TAG, "=== sms전송을 위한 퍼미션 확인 ===")
 
-            // For device above MarshMallow
             val permission: Boolean = getWritePermission()
             if (permission) {
-                // If permission Already Granted
-                // Send You SMS here
                 Log.d(TAG, "=== 퍼미션 허용 ===")
 
                 binding.sendSmsButton.setOnClickListener {
                     try {
                         Log.d(TAG, "=== 문자 전송 시작 ===")
-
-                        //전송
                         val smsManager: SmsManager = SmsManager.getDefault()
+                        num = numberGen(5, 1)
                         smsManager.sendTextMessage(
                             binding.inputPhoneNum.text.toString(),
                             "단지네",
-                            "인증번호는 " + numberGen(1,1) + "입니다.",
+                            "인증번호는 " + num + "입니다.",
                             null,
                             null
                         )
@@ -57,11 +55,42 @@ class AuthenticationActivity : AppCompatActivity() {
 
 
                 }
+
             }
         } else {
-            // Send Your SMS. You don't need Run time permission
             Log.d(TAG, "=== 퍼미션 필요 없는 버전임 ===")
         }
+
+        binding.checkButton.setOnClickListener {
+            if(binding.inputCheckNum.text.toString() == "1"){
+                Log.d(TAG,"인증 완료")
+                val intent = Intent(this, SingUpActivity::class.java)
+                intent.apply {
+                    this.putExtra("phoneNum",binding.inputPhoneNum.text.toString())
+                }
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                startActivity(intent)
+            }else{
+                Log.d(TAG,"인증 실패")
+            }
+        }
+
+        binding.inputCheckNum.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (binding.inputCheckNum.length() > 0) {
+                    binding.checkButton.isEnabled = true
+                }
+            }
+        })
+
     }
 
     fun getWritePermission(): Boolean {
@@ -84,26 +113,24 @@ class AuthenticationActivity : AppCompatActivity() {
         when (requestCode) {
             10 -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Permission is Granted
-                    // Send Your SMS here
                 }
             }
         }
     }
 
-    fun numberGen (len: Int, dupCd: Int): String{
+    fun numberGen(len: Int, dupCd: Int): String {
         var rand = Random
         var numStr: String = ""
 
-        for(i: Int in 0..len ) run {
+        for (i: Int in 0..len) run {
             var ran = Integer.toString(rand.nextInt(10))
 
-            if(dupCd == 1){
+            if (dupCd == 1) {
                 numStr += ran
-            }else if(dupCd == 2){
-                if(!numStr.contains(ran)){
+            } else if (dupCd == 2) {
+                if (!numStr.contains(ran)) {
                     numStr += ran
-                }else{
+                } else {
                 }
             }
         }

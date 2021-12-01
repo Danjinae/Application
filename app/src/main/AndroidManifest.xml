@@ -17,6 +17,12 @@
         android:theme="@style/Theme.Danjinae"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.AptAuthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.SingUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.AuthenticationActivity"
             android:exported="true" />
         <activity
