@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.AuthenticationActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="본인 인증 기능"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@+id/input_phone_num"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/input_phone_num"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/input_phone_num"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="핸드폰 번호를  - 없이 입력해주세요."
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        />
+
+
+    <Button
+        android:id="@+id/send_sms_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="인증번호 발송"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/input_phone_num"
+        app:layout_constraintStart_toStartOf="@+id/input_phone_num"
+        app:layout_constraintTop_toBottomOf="@+id/input_phone_num" />
+
+    <EditText
+        android:id="@+id/input_check_num"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="인증번호를 입력해주세요."
+        app:layout_constraintEnd_toEndOf="@+id/send_sms_button"
+        app:layout_constraintStart_toStartOf="@+id/send_sms_button"
+        app:layout_constraintTop_toBottomOf="@+id/send_sms_button" />
+
+    <Button
+        android:id="@+id/check_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="인증번호 확인"
+        app:layout_constraintEnd_toEndOf="@+id/input_check_num"
+        app:layout_constraintStart_toStartOf="@+id/input_check_num"
+        app:layout_constraintTop_toBottomOf="@+id/input_check_num" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,9 @@
     package="com.danjinae">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".view.BaseApplication"
@@ -11,7 +14,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Danjinae">
+        android:theme="@style/Theme.Danjinae"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".view.AuthenticationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".view.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.community.BoardInfoActivity"
+            android:exported="true" />
         <activity
             android:name=".view.community.FreeBoardActivity"
             android:exported="true" />
@@ -26,7 +39,7 @@
         </activity>
         <activity
             android:name=".view.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
