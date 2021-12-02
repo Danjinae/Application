@@ -3,7 +3,7 @@ package com.danjinae.vo
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Vehicle (
+data class VehicleRequest (
     var endDate: String? = null,
     var number: String? = null,
     var phone: String? = null,
@@ -27,12 +27,12 @@ data class Vehicle (
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Vehicle> {
-        override fun createFromParcel(parcel: Parcel): Vehicle {
-            return Vehicle(parcel)
+    companion object CREATOR : Parcelable.Creator<VehicleRequest> {
+        override fun createFromParcel(parcel: Parcel): VehicleRequest {
+            return VehicleRequest(parcel)
         }
 
-        override fun newArray(size: Int): Array<Vehicle?> {
+        override fun newArray(size: Int): Array<VehicleRequest?> {
             return arrayOfNulls(size)
         }
     }

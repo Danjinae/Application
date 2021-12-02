@@ -32,9 +32,8 @@ class CarFragment : Fragment() {
         btnGuestCar = binding.btGuestCar
         carNum = binding.edtCar
 
-        bundle.putString("carNum",carNum.toString())
-
         btnCarSearch.setOnClickListener {
+            bundle.putString("carNum",carNum.text.toString())
             var dialogCarSearch = CarSearchFragment()
             dialogCarSearch.arguments = bundle
             dialogCarSearch.show(childFragmentManager, "carSearchDialog")

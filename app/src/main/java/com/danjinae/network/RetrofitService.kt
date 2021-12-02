@@ -30,13 +30,19 @@ interface RetrofitService {
     @Headers("Content-Type: application/json","Connection: Keep-alive")
     @POST("/vehicle/guest")
     fun postVehicleGuest(
-        @Body vehicle: Vehicle
-        ): Call<List<Vehicle>>
+        @Body vehicleRequest: VehicleRequest
+        ): Call<List<VehicleRequest>>
 
     @GET("/vehicle/select/info")
     fun getVehicleInfo(
         @Query("vehicleId") vehicleId: Int
     ): Call<VehicleInfo>
+
+    //@Headers("ACCESS_TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjAxMDIyMTc3MTQ4MSIsImlhdCI6MTYzODQyMjM4OCwiZXhwIjoxNjM4NDI0MTg4fQ.lObu4Du9iRu7JpPBNRt_oMGSDDphgRN-ehOdibf0Vlw")
+    @GET("vehicle/select/list")
+    fun getVehicleSelectList(
+        @Query ("number") number: String
+    ): Call<VehicleList>
 
     @GET("/mgfee/getmgfee")
     fun getMgFee(
