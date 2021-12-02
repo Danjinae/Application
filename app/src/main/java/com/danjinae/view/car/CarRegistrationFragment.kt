@@ -12,7 +12,7 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.danjinae.databinding.FragmentCarRegistrationBinding
 import com.danjinae.network.RetrofitClient
-import com.danjinae.vo.Vehicle
+import com.danjinae.vo.VehicleRequest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,7 +22,7 @@ import java.util.*
 
 class CarRegistrationFragment : DialogFragment() {
     val TAG = "carRegisrationtDialog"
-    val guestCar = Vehicle()
+    val guestCar = VehicleRequest()
     lateinit var datePicker: DatePickerHelper
     lateinit var btnCarInput: Button
     lateinit var btnCarCancel: Button
@@ -63,12 +63,12 @@ class CarRegistrationFragment : DialogFragment() {
             guestCar.number = carNum.text.toString()
             guestCar.phone = carPhone.text.toString()
 
-            val call: Call<List<Vehicle>> =
+            val call: Call<List<VehicleRequest>> =
                 RetrofitClient.networkService.postVehicleGuest(guestCar)
-            call.enqueue(object : Callback<List<Vehicle>> {
+            call.enqueue(object : Callback<List<VehicleRequest>> {
                 override fun onResponse(
-                    call: Call<List<Vehicle>>,
-                    response: Response<List<Vehicle>>
+                    call: Call<List<VehicleRequest>>,
+                    response: Response<List<VehicleRequest>>
                 ) {
                     if (response.isSuccessful) {
                         Log.d(TAG, "성공 : ${response.body()}")
@@ -76,7 +76,7 @@ class CarRegistrationFragment : DialogFragment() {
                         Log.d(TAG, "실패 : ${response.errorBody()?.string()!!}")
                     }
                 }
-                override fun onFailure(call: Call<List<Vehicle>>, t: Throwable) {
+                override fun onFailure(call: Call<List<VehicleRequest>>, t: Throwable) {
                     Log.d(TAG, "실패1 : $t")
                 }
             })

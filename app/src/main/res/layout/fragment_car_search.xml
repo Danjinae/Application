@@ -6,29 +6,77 @@
     tools:context=".view.car.CarSearchFragment">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_margin="20dp"
+        android:gravity="center">
 
         <TextView
-            android:id="@+id/text_car_classification"
+            android:id="@+id/textCar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/hello_blank_fragment"/>
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:text="차량번호"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"/>
 
         <TextView
-            android:id="@+id/text_carAdress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/text_car_classification"
-            android:text="@string/hello_blank_fragment" />
+            android:id="@+id/CarNum"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/textCar"
+            android:hint="차량번호"
+            android:paddingTop="5dp"
+            android:textAlignment="center"
+            android:textSize="25dp" />
 
         <TextView
-            android:id="@+id/text_carPhoneNum"
+            android:id="@+id/carAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_carAdress"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:hint="101동 101호"
+            android:layout_below="@+id/CarNum"/>
+
+        <TextView
+            android:id="@+id/carClass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/carAddress"
+            android:hint="입주민 차량입니다!" />
+
+        <TextView
+            android:id="@+id/Phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/carClass"
+            android:layout_marginStart="93dp"
+            android:layout_marginTop="5dp"
+            android:text="연락처: " />
+
+        <TextView
+            android:id="@+id/carPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/carClass"
+            android:layout_centerHorizontal="true"
+            android:layout_toEndOf="@+id/Phone"
+            android:layout_toRightOf="@+id/Phone"
+            android:hint="01000000000" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="확인"/>
+
     </RelativeLayout>
 
 </FrameLayout>
