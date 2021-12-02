@@ -1,9 +1,12 @@
 package com.danjinae.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.danjinae.databinding.AptListBinding
+import com.danjinae.view.AptAuthActivity
 import com.danjinae.vo.AptListResponse
 
 class AptChoiceViewHolder(val binding: AptListBinding): RecyclerView.ViewHolder(binding.root){
@@ -18,6 +21,15 @@ class AptChoiceAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         val binding = (holder as AptChoiceViewHolder).binding
         binding.aptName.text = aptData[position].name
         binding.aptAddress.text = aptData[position].address
+
+        binding.btnAptChoice.setOnClickListener {
+            val intent = Intent(binding.btnAptChoice.context,AptAuthActivity::class.java)
+            intent.apply {
+                this.putExtra("aptName",aptData[position].name)
+            }
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            ContextCompat.startActivity(binding.btnAptChoice.context,intent,null)
+        }
     }
 
     override fun getItemCount(): Int{

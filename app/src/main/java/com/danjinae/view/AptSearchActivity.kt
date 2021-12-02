@@ -67,9 +67,5 @@ class AptSearchActivity : AppCompatActivity() {
                 }
             }
         })
-
-        fun aptFilter(aptList: MutableList<AptListResponse>){
-            aptChoiceAdapter.aptData.clear()
-        }
     }
 }

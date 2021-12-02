@@ -14,6 +14,10 @@ class AptAuthActivity : AppCompatActivity() {
             val intent = Intent(this, AptSearchActivity::class.java)
             startActivity(intent)
         }
+
+        val aptName = intent.getStringExtra("aptName")
+        binding.textChoiceApt.text = aptName
+
         setContentView(binding.root)
     }
 }
