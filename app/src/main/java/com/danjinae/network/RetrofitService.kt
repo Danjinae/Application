@@ -64,13 +64,18 @@ interface RetrofitService {
         @Query ("userId") userId: Int
     ): Call<Notice>
 
-    @PUT("user/signup")
+    @PUT("/user/signup")
     fun putSingUp(
         @Body signUp: LoginUserRequest
     ): Call<Boolean>
 
-    @POST("user/login")
+    @POST("/user/login")
     fun postLogin(
         @Body login: LoginUserRequest
     ): Call<Boolean>
+
+    @GET("/user/aptchoice")
+    fun getapt(
+        @Query ("address") address: String
+    ):Call<AptList>
 }
