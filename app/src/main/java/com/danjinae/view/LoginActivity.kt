@@ -26,8 +26,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnLogin.setOnClickListener {
-            login.password = binding.editId.text.toString()
-            login.phone = binding.editPassword.text.toString()
+            login.phone = binding.editId.text.toString()
+            login.password = binding.editPassword.text.toString()
             val call: Call<Boolean> = RetrofitClient.networkService.postLogin(login)
 
             call.enqueue(object : Callback<Boolean> {
@@ -36,14 +36,12 @@ class LoginActivity : AppCompatActivity() {
                     response: Response<Boolean>
                 ){
                     if(response.isSuccessful){
-                        val headers: okhttp3.Headers = response.headers()
-                        // get header value
-                        headers
-                        val cookie = headers.get("Connection")
-                        Log.d("로그인1",headers.toString())
-                        Log.d("로그인2",cookie.toString())
-                        //CallMain()
+                        val token = response.headers().get("ACCESS_TOKEN")
+
+                        Log.d("로그인",token.toString())
+                        CallMain(token)
                     }else{
+                        Log.d("로그인", "실패 : ${response.errorBody()?.string()!!}")
                     }
                 }
                 override fun onFailure(call: Call<Boolean>, t: Throwable) {
@@ -53,9 +51,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun CallMain() {
+    fun CallMain(token: String?) {
         val intent = Intent(this, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        intent.putExtra("token",token)
         startActivity(intent)
     }
 }
