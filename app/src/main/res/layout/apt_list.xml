@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="30dp"
+    android:layout_marginEnd="30dp">
+
+    <RelativeLayout
+        android:id="@+id/aptItem"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:id="@+id/aptName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아파트이름"
+            android:textStyle="bold"
+            android:textSize="25dp"/>
+
+        <TextView
+            android:id="@+id/aptAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아파트주소"
+            android:layout_below="@id/aptName"
+            android:textSize="15dp"/>
+
+        <Button
+            android:id="@+id/btnAptChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="선택"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
