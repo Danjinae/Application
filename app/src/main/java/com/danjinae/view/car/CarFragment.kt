@@ -1,13 +1,22 @@
 package com.danjinae.view.car
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.danjinae.adapter.CarChoiceAdapter
 import com.danjinae.databinding.FragmentCarBinding
+import com.danjinae.network.RetrofitClient
+import com.danjinae.vo.VehicleList
+import com.danjinae.vo.VehicleResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class CarFragment : Fragment() {
@@ -32,11 +41,40 @@ class CarFragment : Fragment() {
         btnGuestCar = binding.btGuestCar
         carNum = binding.edtCar
 
+        val layoutManager = LinearLayoutManager(context)
+        val carChoiceAdapter = CarChoiceAdapter()
+        binding.carList.layoutManager = layoutManager
+        binding.carList.adapter = carChoiceAdapter
+
         btnCarSearch.setOnClickListener {
-            bundle.putString("carNum",carNum.text.toString())
-            var dialogCarSearch = CarSearchFragment()
-            dialogCarSearch.arguments = bundle
-            dialogCarSearch.show(childFragmentManager, "carSearchDialog")
+//            bundle.putString("carNum",carNum.text.toString())
+//            var dialogCarSearch = CarSearchFragment()
+//            dialogCarSearch.arguments = bundle
+//            dialogCarSearch.show(childFragmentManager, "carSearchDialog")
+            carChoiceAdapter.carData.clear()
+            val call: Call<VehicleList> = RetrofitClient.networkService.getVehicleSelectList(carNum.text.toString())
+            call.enqueue(object : Callback<VehicleList> {
+                override fun onResponse(
+                    call: Call<VehicleList>,
+                    response: Response<VehicleList>
+                ){
+                    if(response.isSuccessful){
+                        Log.d("조회", "성공 : ${response.body()?.content}")
+                        var carList: MutableList<VehicleResponse>? = response.body()?.content
+                        if (carList != null && carList.size > 0) {
+                            for(i in 0 until carList.size) {
+                                carChoiceAdapter.carData.add(carList[i])
+                                carChoiceAdapter.notifyDataSetChanged()
+                            }
+                        }
+                    }else{
+                    }
+                }
+                override fun onFailure(call: Call<VehicleList>, t: Throwable) {
+                    Log.d("연결", "실패 : $t")
+                }
+            })
+
         }
 
         btnGuestCar.setOnClickListener {
@@ -46,38 +84,3 @@ class CarFragment : Fragment() {
         return binding.root
     }
 }
-
-
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        val binding = FragmentCarBinding.bind(view)
-//        btnCarSearch = binding.btnCarSerch
-//        btnGuestCar = binding.btGuestCar
-//        carNum = binding.edtCar
-//
-//        btnCarSearch.setOnClickListener{
-//            val call: Call<PostModel> = RetrofitClient.networkService.addPost(PostModel())
-//            call.enqueue(object : Callback<PostModel> {
-//                override fun onResponse(
-//                    call: Call<PostModel>,
-//                    response: Response<PostModel>
-//                ) {
-//                    if(response.isSuccessful){
-//                        Log.d("조회", "성공 : ${response.raw()}")
-//                    }
-//                    Log.d("조회2", "실패 : ${response.errorBody()?.string()!!}")
-//                }
-//                override fun onFailure(call: Call<PostModel>, t: Throwable) {
-//                    Log.d("조회3", "실패 : $t")
-//                }
-//            })
-//        }
-//
-//        btnGuestCar.setOnClickListener{
-//            var dialog = CarRegistrationFragment()
-//            dialog.show(childFragmentManager,"carDialog")
-//        }
-//    }
-//
-//}
