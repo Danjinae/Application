@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.danjinae.databinding.AptListBinding
-import com.danjinae.view.AptAuthActivity
+import com.danjinae.view.join.AptAuthActivity
 import com.danjinae.vo.AptListResponse
 
 class AptChoiceViewHolder(val binding: AptListBinding): RecyclerView.ViewHolder(binding.root){
@@ -23,7 +23,7 @@ class AptChoiceAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         binding.aptAddress.text = aptData[position].address
 
         binding.btnAptChoice.setOnClickListener {
-            val intent = Intent(binding.btnAptChoice.context,AptAuthActivity::class.java)
+            val intent = Intent(binding.btnAptChoice.context, AptAuthActivity::class.java)
             intent.apply {
                 this.putExtra("aptName",aptData[position].name)
             }

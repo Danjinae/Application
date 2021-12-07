@@ -1,4 +1,4 @@
-package com.danjinae.view
+package com.danjinae.view.join
 
 import android.os.Bundle
 import android.text.Editable

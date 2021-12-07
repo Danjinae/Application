@@ -1,4 +1,4 @@
-package com.danjinae.view
+package com.danjinae.view.join
 
 import android.Manifest
 import android.content.Intent
@@ -20,6 +20,7 @@ class AuthenticationActivity : AppCompatActivity() {
     val SMS_SEND_PERMISSION = 1
     var num: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         val binding = ActivityAuthenticationBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -52,8 +53,6 @@ class AuthenticationActivity : AppCompatActivity() {
                         var sendCan = false
                         Log.d(TAG, "=== sendCan === :$sendCan")
                     }
-
-
                 }
 
             }

@@ -1,4 +1,4 @@
-package com.danjinae.view
+package com.danjinae.view.join
 
 import android.content.Intent
 import android.os.Bundle

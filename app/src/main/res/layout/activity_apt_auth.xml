@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.AptAuthActivity">
+    tools:context=".view.join.AptAuthActivity">
 
     <TextView
         android:id="@+id/text_joinMember"
@@ -83,4 +83,11 @@
         app:layout_constraintBottom_toBottomOf="@+id/edit_ho"
         app:layout_constraintEnd_toEndOf="@+id/edit_ho"
         app:layout_constraintTop_toTopOf="@+id/edit_ho" />
+
+    <Button
+        android:id="@+id/aptConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="확인"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
