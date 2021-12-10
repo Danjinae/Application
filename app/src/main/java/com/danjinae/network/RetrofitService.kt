@@ -6,7 +6,6 @@ import retrofit2.http.*
 
 interface RetrofitService {
 
-    @Headers("Content-Type: application/json")
     @POST("/comment/add")
     fun postComment(
         @Body comment: Comment,
@@ -18,7 +17,6 @@ interface RetrofitService {
         @Query("PostId") postId: Int
     ): Call<CommentList>
 
-    @Headers("Content-Type: application/json")
     @POST("/post/add")
     fun addPost(
         @Body post: Post
@@ -27,7 +25,6 @@ interface RetrofitService {
     @GET("/post/total-list")
     fun getPostList(): Call<PostList>
 
-    @Headers("Content-Type: application/json","Connection: Keep-alive")
     @POST("/vehicle/guest")
     fun postVehicleGuest(
         @Body vehicleRequest: VehicleRequest
@@ -38,7 +35,6 @@ interface RetrofitService {
         @Query("vehicleId") vehicleId: Int
     ): Call<VehicleInfo>
 
-    //@Headers("ACCESS_TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjAxMDIyMTc3MTQ4MSIsImlhdCI6MTYzODQyMjM4OCwiZXhwIjoxNjM4NDI0MTg4fQ.lObu4Du9iRu7JpPBNRt_oMGSDDphgRN-ehOdibf0Vlw")
     @GET("vehicle/select/list")
     fun getVehicleSelectList(
         @Query ("number") number: String

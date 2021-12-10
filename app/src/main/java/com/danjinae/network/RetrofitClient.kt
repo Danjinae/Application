@@ -1,7 +1,10 @@
 package com.danjinae.network
 
 import android.app.Application
+import com.danjinae.view.LoginActivity.Companion.prefs
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
@@ -13,20 +16,33 @@ import javax.inject.Inject
 
 
 object RetrofitClient : Application() {
-
     var networkService: RetrofitService
     val URL = "http://101.101.219.69:8080/"
     private val client: OkHttpClient
     init {
     val interceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY }
+        level = HttpLoggingInterceptor.Level.BODY}
         client = OkHttpClient.Builder()
             .addInterceptor(interceptor)
+            .addInterceptor(HeaderInterceptor())
             .connectTimeout(30, TimeUnit.MINUTES)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .build()
     }
+
+    class HeaderInterceptor : Interceptor {
+        override fun intercept(chain: Interceptor.Chain): Response = chain.run {
+            proceed(
+                request()
+                    .newBuilder()
+                    .addHeader("ACCESS_TOKEN", prefs.getString("ACCESS_TOKEN",""))
+                    .addHeader("REFRESH_TOKEN", prefs.getString("REFRESH_TOKEN",""))
+                    .build()
+            )
+        }
+    }
+
     val retrofit: Retrofit
         get() = Retrofit.Builder()
             .baseUrl(URL)
