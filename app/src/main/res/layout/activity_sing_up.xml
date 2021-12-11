@@ -70,7 +70,7 @@
         android:inputType="textPassword"/>
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="비밀번호는 8~16자리 영문, 숫자조합으로 입력해주세요."
