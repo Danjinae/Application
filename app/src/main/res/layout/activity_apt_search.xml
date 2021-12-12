@@ -6,16 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".view.join.AptSearchActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textApt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="아파트 검색"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/aptSearch"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <EditText
         android:id="@+id/aptSearch"
@@ -23,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:hint="아파트명을 입력해주세요요"
+        android:hint="아파트명을 입력해주세요"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textApt" />
@@ -31,8 +38,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleApt"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="116dp"
+        android:layout_height="595dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

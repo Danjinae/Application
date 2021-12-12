@@ -2,6 +2,7 @@ package com.danjinae.view.join
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.danjinae.databinding.ActivityAptAuthBinding
@@ -11,6 +12,12 @@ class AptAuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityAptAuthBinding.inflate(layoutInflater)
+
+        val toolbar = binding.toolbar
+
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         binding.textChoiceApt.setOnClickListener{
             val intent = Intent(this, AptSearchActivity::class.java)
@@ -28,5 +35,16 @@ class AptAuthActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

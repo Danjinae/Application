@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.danjinae.adapter.AptChoiceAdapter
@@ -20,6 +21,12 @@ class AptSearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityAptSearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val toolbar = binding.toolbar
+
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val layoutManager = LinearLayoutManager(this)
         val aptChoiceAdapter = AptChoiceAdapter()
@@ -49,7 +56,6 @@ class AptSearchActivity : AppCompatActivity() {
                                 var aptList: MutableList<AptListResponse>? = response.body()?.content
                                 if (aptList != null && aptList.size > 0) {
                                     for(i in 0 until aptList.size){
-                                        aptChoiceAdapter.aptData.clear()
                                         aptChoiceAdapter.aptData.add(aptList[i])
                                         aptChoiceAdapter.notifyDataSetChanged()
                                     }
@@ -67,5 +73,16 @@ class AptSearchActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
