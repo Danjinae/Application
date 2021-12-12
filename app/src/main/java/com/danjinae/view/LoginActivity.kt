@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Window
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.danjinae.R
@@ -15,6 +16,8 @@ import com.danjinae.databinding.ActivityLoginBinding
 import com.danjinae.network.RetrofitClient
 import com.danjinae.view.join.AuthenticationActivity
 import com.danjinae.vo.LoginUserRequest
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.dialog_login.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
     var login = LoginUserRequest()
     val TAG = "로그인"
+    var backKeypressedTime: Long = 0
     companion object {
         lateinit var prefs: PrefsManager
     }
@@ -33,6 +37,23 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         prefs = PrefsManager(this)
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("토큰", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log and toast
+            //val msg = getString(R.string.msg_token_fmt, token)
+            if (token != null) {
+                Log.d("토큰", token)
+            }
+            //Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+        })
 
         binding.textSingUp.setOnClickListener{
             val intent = Intent(this, AuthenticationActivity::class.java)
@@ -86,22 +107,6 @@ class LoginActivity : AppCompatActivity() {
             })
         }
 
-//        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-//            if (!task.isSuccessful) {
-//                Log.w("토큰", "Fetching FCM registration token failed", task.exception)
-//                return@OnCompleteListener
-//            }
-//
-//            // Get new FCM registration token
-//            val token = task.result
-//
-//            // Log and toast
-//            //val msg = getString(R.string.msg_token_fmt, token)
-//            if (token != null) {
-//                Log.d("토큰", token)
-//            }
-//            //Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
-//        })
     }
 
     fun CallMain() {
@@ -118,6 +123,18 @@ class LoginActivity : AppCompatActivity() {
 
         fun setString(key: String, value: String) {
             prefs.edit().putString(key, value).apply()
+        }
+    }
+
+    override fun onBackPressed() {
+        if(System.currentTimeMillis() > backKeypressedTime + 2500) {
+            backKeypressedTime = System.currentTimeMillis()
+            Toast.makeText(this,"종료를 원하시면 뒤로가기를 한번 더 눌러주세요.",Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if(System.currentTimeMillis() <= backKeypressedTime + 2500) {
+            finishAffinity()
         }
     }
 }
