@@ -2,13 +2,20 @@ package com.danjinae.view
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.Window
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.danjinae.R
 import com.danjinae.databinding.ActivityLoginBinding
 import com.danjinae.network.RetrofitClient
 import com.danjinae.view.join.AuthenticationActivity
 import com.danjinae.vo.LoginUserRequest
+import kotlinx.android.synthetic.main.dialog_login.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,16 +52,30 @@ class LoginActivity : AppCompatActivity() {
                 ){
                     if(response.isSuccessful){
                         val accessToken = response.headers().get("ACCESS_TOKEN")
-                        Log.d(TAG,accessToken.toString())
-                        if (accessToken != null) {
-                            prefs.setString("ACCESS_TOKEN",accessToken)
-                        }
                         val refreshToken = response.headers().get("REFRESH_TOKEN")
-                        Log.d(TAG,refreshToken.toString())
-                        if (refreshToken != null) {
-                            prefs.setString("REFRESH_TOKEN",refreshToken)
+
+                        if(response.body()!!){
+                            if (accessToken != null) {
+                                prefs.setString("ACCESS_TOKEN",accessToken)
+                            }
+                            if (refreshToken != null) {
+                                prefs.setString("REFRESH_TOKEN",refreshToken)
+                            }
+                            CallMain()
+                        }else{
+                            val loginDialogView = LayoutInflater.from(this@LoginActivity).inflate(R.layout.dialog_login, null)
+                            val loginBuilder = AlertDialog.Builder(this@LoginActivity)
+                                .setView(loginDialogView)
+                            val dialog = loginBuilder.create()
+                            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialog.show()
+
+                            val button = loginDialogView.btnConfirm
+                            button.setOnClickListener{
+                                dialog.dismiss()
+                            }
                         }
-                        CallMain()
                     }else{
                         Log.d(TAG, "실패 : ${response.errorBody()?.string()!!}")
                     }
