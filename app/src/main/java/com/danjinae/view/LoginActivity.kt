@@ -38,23 +38,6 @@ class LoginActivity : AppCompatActivity() {
 
         prefs = PrefsManager(this)
 
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w("토큰", "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
-
-            // Get new FCM registration token
-            val token = task.result
-
-            // Log and toast
-            //val msg = getString(R.string.msg_token_fmt, token)
-            if (token != null) {
-                Log.d("토큰", token)
-            }
-            //Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
-        })
-
         binding.textSingUp.setOnClickListener{
             val intent = Intent(this, AuthenticationActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
@@ -82,6 +65,7 @@ class LoginActivity : AppCompatActivity() {
                             if (refreshToken != null) {
                                 prefs.setString("REFRESH_TOKEN",refreshToken)
                             }
+                            DeviceToken()
                             CallMain()
                         }else{
                             val loginDialogView = LayoutInflater.from(this@LoginActivity).inflate(R.layout.dialog_login, null)
@@ -108,6 +92,43 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
+
+    private fun DeviceToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("토큰", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log and toast
+            //val msg = getString(R.string.msg_token_fmt, token)
+            if (token != null) {
+                Log.d("토큰", token)
+                val call: Call<Boolean> = RetrofitClient.networkService.newToken(token)
+                call.enqueue(object : Callback<Boolean> {
+                    override fun onResponse(
+                        call: Call<Boolean>,
+                        response: Response<Boolean>
+                    ) {
+                        if (response.isSuccessful) {
+
+                        } else {
+
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Boolean>, t: Throwable) {
+                        Log.d("연결", "실패 : $t")
+                    }
+                })
+            }
+            //Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+        })
+    }
+
 
     fun CallMain() {
         val intent = Intent(this, MainActivity::class.java)
