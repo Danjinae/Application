@@ -15,6 +15,7 @@ import com.danjinae.R
 import com.danjinae.databinding.ActivityLoginBinding
 import com.danjinae.network.RetrofitClient
 import com.danjinae.view.join.AuthenticationActivity
+import com.danjinae.vo.FcmToken
 import com.danjinae.vo.LoginUserRequest
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
@@ -28,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
     var login = LoginUserRequest()
     val TAG = "로그인"
     var backKeypressedTime: Long = 0
+    var fcmToken = FcmToken()
     companion object {
         lateinit var prefs: PrefsManager
     }
@@ -102,21 +104,21 @@ class LoginActivity : AppCompatActivity() {
 
             // Get new FCM registration token
             val token = task.result
-
+            fcmToken.token = token
             // Log and toast
             //val msg = getString(R.string.msg_token_fmt, token)
             if (token != null) {
                 Log.d("토큰", token)
-                val call: Call<Boolean> = RetrofitClient.networkService.newToken(token)
+                val call: Call<Boolean> = RetrofitClient.networkService.newToken(fcmToken)
                 call.enqueue(object : Callback<Boolean> {
                     override fun onResponse(
                         call: Call<Boolean>,
                         response: Response<Boolean>
                     ) {
                         if (response.isSuccessful) {
-
+                            Log.d("fcm토큰","저장성공")
                         } else {
-
+                            Log.d(TAG, "실패 : ${response.errorBody()?.string()!!}")
                         }
                     }
 
