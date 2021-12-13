@@ -28,9 +28,11 @@ class BoardAdapter(val data: MutableList<Post>): RecyclerView.Adapter<RecyclerVi
         val binding = (holder as BoardViewHolder).binding
         binding.boardTitle.text = data[position].title
         binding.boardContent.text = data[position].content
+        val postId: Int = data[position].postId
 
-        binding.cardPostItem.setOnClickListener { ;
+        binding.cardPostItem.setOnClickListener {
             Intent(holder.itemView.context, BoardInfoActivity::class.java).apply {
+                this.putExtra("postId",postId)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }.run { holder.itemView.context?.startActivity(this) }
         }
