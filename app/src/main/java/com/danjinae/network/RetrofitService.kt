@@ -14,13 +14,18 @@ interface RetrofitService {
 
     @GET("/comment/list")
     fun getComment(
-        @Query("PostId") postId: Int
+        @Query("postId") postId: Int
     ): Call<CommentList>
 
     @POST("/post/add")
     fun addPost(
         @Body post: Post
     ): Call<Boolean>
+
+    @GET("/post/select")
+    fun selectPost(
+        @Query("postId") postId: Int
+    ): Call<PostResponse>
 
     @GET("/post/total-list")
     fun getPostList(): Call<PostList>
@@ -42,8 +47,6 @@ interface RetrofitService {
 
     @GET("/mgfee/getmgfee")
     fun getMgFee(
-        @Query ("aptId") aptId: Int,
-        @Query ("userId") userId: Int
     ): Call<MgFee>
 
     @POST("complaint/add")
@@ -58,7 +61,7 @@ interface RetrofitService {
 
     @GET("/complaint/select/{cplid}")
     fun getManagerComplaint(
-        @Query ("cplid") cplid: Int
+        @Path ("cplid") cplid: Int
     ): Call<ComplaintProcess>
 
     @GET("notice/get")
@@ -80,4 +83,9 @@ interface RetrofitService {
     fun getapt(
         @Query ("address") address: String
     ):Call<AptList>
+
+    @POST("/user/newfcmtoken")
+    fun newToken(
+        @Body token: FcmToken
+    ):Call<Boolean>
 }
