@@ -20,7 +20,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
 
 class FreeBoardFragment : Fragment() {
@@ -28,6 +27,7 @@ class FreeBoardFragment : Fragment() {
     lateinit var addFAB: FloatingActionButton
     var datas = mutableListOf<Post>()
     var postModel = Post()
+    val TAG = "커뮤니티"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,15 +58,15 @@ class FreeBoardFragment : Fragment() {
                             for(i in 0 until dataList.size){
                                 datas.add(dataList[i])
                             }
-                            Log.d("데이터",datas.toString())
+                            Log.d(TAG,datas.toString())
                             boardAdapter.notifyDataSetChanged()
                         }
                     } else{
-                        Log.d("2","2")
+                        Log.d(TAG, "실패 : ${response.errorBody()?.string()!!}")
                     }
                 }
                 override fun onFailure(call: Call<PostList>, t: Throwable) {
-                    Log.d("조회", "실패 : $t")
+                    Log.d(TAG, "실패 : $t")
                 }
             })
 
