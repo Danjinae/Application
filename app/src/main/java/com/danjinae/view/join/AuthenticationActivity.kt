@@ -68,7 +68,7 @@ class AuthenticationActivity : AppCompatActivity() {
         }
 
         binding.checkButton.setOnClickListener {
-            if(binding.inputCheckNum.text.toString() == "1"){
+            if(binding.inputCheckNum.text.toString() == num){
                 Log.d(TAG,"인증 완료")
                 val intent = Intent(this, SingUpActivity::class.java)
                 intent.apply {

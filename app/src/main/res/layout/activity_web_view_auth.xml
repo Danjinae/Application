@@ -21,10 +21,18 @@
         android:id="@+id/wViewFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <WebView
             android:id="@+id/wView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="585dp" />
+        <Button
+            android:id="@+id/auth"
+            android:enabled="false"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="확인"/>
     </FrameLayout>
 
 </LinearLayout>

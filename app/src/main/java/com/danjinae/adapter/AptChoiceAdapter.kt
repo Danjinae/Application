@@ -26,6 +26,7 @@ class AptChoiceAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
             val intent = Intent(binding.btnAptChoice.context, AptAuthActivity::class.java)
             intent.apply {
                 this.putExtra("aptName",aptData[position].name)
+                this.putExtra("aptId",aptData[position].aptId)
             }
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             ContextCompat.startActivity(binding.btnAptChoice.context,intent,null)

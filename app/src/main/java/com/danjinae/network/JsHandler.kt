@@ -7,6 +7,6 @@ class JsHandler {
 
     @JavascriptInterface
     fun resultAuth(message: String) {
-        Log.d("성공",message)
+        Log.d("성공!",message)
     }
 }

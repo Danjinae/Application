@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.danjinae.R
 import com.danjinae.databinding.ActivityLoginBinding
 import com.danjinae.network.RetrofitClient
-import com.danjinae.view.join.AuthenticationActivity
+import com.danjinae.view.join.WebViewAuthActivity
 import com.danjinae.vo.FcmToken
 import com.danjinae.vo.LoginUserRequest
 import com.google.android.gms.tasks.OnCompleteListener
@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
         prefs = PrefsManager(this)
 
         binding.textSingUp.setOnClickListener{
-            val intent = Intent(this, AuthenticationActivity::class.java)
+            val intent = Intent(this, WebViewAuthActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
         }

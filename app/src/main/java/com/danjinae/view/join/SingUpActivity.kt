@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.danjinae.databinding.ActivitySingUpBinding
 import com.danjinae.network.RetrofitClient
+import com.danjinae.view.LoginActivity
 import com.danjinae.vo.LoginUserRequest
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,7 +38,7 @@ class SingUpActivity : AppCompatActivity() {
 
 
         binding.btnConfirm.setOnClickListener {
-            val intent = Intent(this, AptAuthActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
         }
