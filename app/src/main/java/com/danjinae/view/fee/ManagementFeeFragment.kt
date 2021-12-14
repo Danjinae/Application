@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.danjinae.databinding.FragmentManagementFeeBinding
 import com.danjinae.network.RetrofitClient
@@ -40,6 +41,7 @@ class ManagementFeeFragment : Fragment() {
         val binding = FragmentManagementFeeBinding.inflate(inflater, container, false)
         textFee = binding.textFee
         btpay = binding.btPay
+        var noty = binding.noti
         var view = FeeViewModel()
         var fee = Fee()
         var a: String
@@ -54,10 +56,19 @@ class ManagementFeeFragment : Fragment() {
                 if(response.isSuccessful){
                     Log.d("조회", "성공 : ${response.raw()}")
                     var content: MutableList<UserMgFeeResponse>? = response.body()?.content
-                    textFee.text = response.body()?.content?.get(0)?.fee.toString()
-                    LoginActivity.prefs.setString("amount",textFee.text.toString())
+                    Log.d("1",content.toString())
+                    if (content != null && content.size > 0) {
+                        btpay.isEnabled = true
+                        noty.isVisible = false
+                        textFee.text = content?.get(0)?.fee.toString()
+                        LoginActivity.prefs.setString("amount",textFee.text.toString())
+                    }else{
+                        btpay.isEnabled = false
+                        noty.isVisible = true
+                    }
                 }else{
-
+                    btpay.isEnabled = false
+                    noty.isVisible = true
                 }
             }
             override fun onFailure(call: Call<MgFee>, t: Throwable) {

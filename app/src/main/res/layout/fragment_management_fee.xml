@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"
-                android:background="#EABFBF">
+                android:background="#FAF2F2">
 
                 <TextView
                     android:id="@+id/text_cardtitle"
@@ -53,13 +53,14 @@
                     android:layout_marginTop="30dp"/>
 
                 <Button
+                    android:enabled="false"
                     android:layout_width="125dp"
                     android:layout_height="33dp"
                     android:layout_below="@+id/text_fee"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="17dp"
-                    android:textSize="10dp"
                     android:text="자세히 확인하기"
-                    android:layout_centerHorizontal="true"/>
+                    android:textSize="10dp" />
 
                 <Button
                     android:id="@+id/bt_pay"
@@ -71,6 +72,15 @@
 
         </androidx.cardview.widget.CardView>
 
+        <TextView
+            android:id="@+id/noti"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="청구된 고지서가 없습니다."
+            android:textColor="#8C1F1F"
+            android:layout_gravity="center"
+            android:textSize="20dp"/>
     </LinearLayout>
 
 </LinearLayout>
